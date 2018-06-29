@@ -125,13 +125,13 @@ describe('BinarySearchTreeNode', () => {
 
     expect(bstRootNode.toString()).toBe('5,10,20');
 
-    const removedNode1 = bstRootNode.remove(5);
+    const removed1 = bstRootNode.remove(5);
     expect(bstRootNode.toString()).toBe('10,20');
-    expect(removedNode1.value).toBe(5);
+    expect(removed1).toBeTruthy();
 
-    const removedNode2 = bstRootNode.remove(20);
+    const removed2 = bstRootNode.remove(20);
     expect(bstRootNode.toString()).toBe('10');
-    expect(removedNode2.value).toBe(20);
+    expect(removed2).toBeTruthy();
   });
 
   it('should remove nodes with one child', () => {
@@ -183,6 +183,21 @@ describe('BinarySearchTreeNode', () => {
 
     bstRootNode.remove(5);
     expect(bstRootNode.toString()).toBe('30');
+  });
+
+  it('should remove node with no parent', () => {
+    const bstRootNode = new BinarySearchTreeNode();
+    expect(bstRootNode.toString()).toBe('');
+
+    bstRootNode.insert(1);
+    bstRootNode.insert(2);
+    expect(bstRootNode.toString()).toBe('1,2');
+
+    bstRootNode.remove(1);
+    expect(bstRootNode.toString()).toBe('2');
+
+    bstRootNode.remove(2);
+    expect(bstRootNode.toString()).toBe('');
   });
 
   it('should throw error when trying to remove not existing node', () => {
